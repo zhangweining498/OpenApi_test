@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<interface>
+    <url name="get_code">
+        <one>openapi</one>
+        <action>get_code</action>
+    </url>
+
+    <url name="access_token">
+        <one>openapi</one>
+        <action>access_token</action>
+    </url>
+
+    <url name="get_user_info">
+        <one>openapi</one>
+        <action>get_user_info</action>
+    </url>
+
+    <url name="refresh_access_token">
+        <one>openapi</one>
+        <action>refresh_access_token</action>
+    </url>
+
+    <url name="check_access_token">
+        <one>openapi</one>
+        <action>check_access_token</action>
+    </url>
+
+    <url name="apply_order">
+        <one>openapi</one>
+        <action>apply_order</action>
+    </url>
+
+    <url name="set_pay_config">
+        <one>openapi</one>
+        <action>set_pay_config</action>
+    </url>
+
+    <url name="pay_small_money">
+        <one>openapi</one>
+        <action>pay_small_money</action>
+    </url>
+
+    <url name="get_hosted_account">
+        <two>openapi</two>
+        <three>v2</three>
+        <action>get_hosted_account</action>
+    </url>
+
+    <url name="get_hosted_account_balance">
+        <two>openapi</two>
+        <three>v2</three>
+        <action>get_hosted_account_balance</action>
+    </url>
+
+    <url name="feeQuote">
+        <two>openapi</two>
+        <three>v2</three>
+        <action>feeQuote</action>
+    </url>
+
+    <url name="push_chain_data">
+        <two>openapi</two>
+        <three>v2</three>
+        <action>push_chain_data</action>
+    </url>
+
+    <url name="token">
+        <two>openapi</two>
+        <three>svdb</three>
+        <action>token</action>
+    </url>
+
+    <url name="count">
+        <two>openapi</two>
+        <three>svdb</three>
+        <four>token</four>
+        <action>count</action>
+    </url>
+
+    <url name="merkle">
+        <two>openapi</two>
+        <three>svdb</three>
+        <four>BSV</four>
+        <action>merkle</action>
+    </url>
+
+    <url name="blockheader">
+        <two>openapi</two>
+        <three>svdb</three>
+        <four>BSV</four>
+        <five>raw</five>
+        <six>hash</six>
+        <action>blockheader</action>
+    </url>
+
+    <url name="transaction">
+        <two>openapi</two>
+        <three>svdb</three>
+        <four>BSV</four>
+        <action>transaction</action>
+    </url>
+
+    <url name="info">
+        <two>openapi</two>
+        <three>svdb</three>
+        <four>BSV</four>
+        <five>address</five>
+        <action>info</action>
+    </url>
+
+    <url name="utxo">
+        <two>openapi</two>
+        <three>svdb</three>
+        <four>BSV</four>
+        <five>address</five>
+        <action>utxo</action>
+    </url>
+
+    <url name="inventory">
+        <two>openapi</two>
+        <three>svdb</three>
+        <four>BSV</four>
+        <five>address</five>
+        <action>inventory</action>
+    </url>
+
+    <url name="hash">
+        <two>openapi</two>
+        <three>svdb</three>
+        <four>BSV</four>
+        <five>block</five>
+        <action>hash</action>
+    </url>
+
+    <url name="height">
+        <two>openapi</two>
+        <three>svdb</three>
+        <four>BSV</four>
+        <five>block</five>
+        <action>height</action>
+    </url>
+
+    <url name="heights">
+        <two>openapi</two>
+        <three>svdb</three>
+        <four>BSV</four>
+        <five>blocks</five>
+        <action>height</action>
+    </url>
+
+    <url name="transaction_block">
+        <two>openapi</two>
+        <three>svdb</three>
+        <four>BSV</four>
+        <five>block</five>
+        <action>transaction</action>
+    </url>
+
+    <url name="info_chain">
+        <two>openapi</two>
+        <three>svdb</three>
+        <four>BSV</four>
+        <five>chain</five>
+        <action>info</action>
+    </url>
+
+    <url name="push_chain_data_dotwallet">
+        <one>api</one>
+        <action>push_chain_data</action>
+    </url>
+
+</interface>
