@@ -55,9 +55,8 @@
     </url>
 
     <url name="feeQuote">
-        <one>platform</one>
         <two>openapi</two>
-        <three>v2</three>
+        <three>mapi</three>
         <action>feeQuote</action>
     </url>
 

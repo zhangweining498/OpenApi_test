@@ -36,16 +36,19 @@ class getHostedAccount(unittest.TestCase):
 
         self.url = common.get_url_from_xml('feeQuote')
         # set url
-        configHttp.set_url(self.url)
+        url = configHttp.set_url(self.url)
+        print(url)
 
         # set headers
         headers = {'token':self.token}
-        configHttp.set_headers(headers)
+        self.header =headers
+        configHttp.set_headers(self.headers)
+        print(headers)
 
         # test interface
         self.return_json = configHttp.requests_by_method(self.method)
 
-        print(self.return_json.text)
+        print(self.return_json.status_code)
         self.cheackresult()
     def cheackresult(self):
         re = []

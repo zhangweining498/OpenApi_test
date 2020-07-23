@@ -18,13 +18,12 @@ info = {}
 @paramunittest.parametrized(*getHostedAccount_xls)
 class getHostedAccount(unittest.TestCase):
 
-    def setParameters(self,case_name,method,app_id,app_secret,coin_type,code,msg):
+    def setParameters(self,case_name,method,headers,data,code,msg):
 
         self.case_name = str(case_name)
         self.method = str(method)
-        self.app_id = str(app_id)
-        self.app_secret = str(app_secret)
-        self.coin_type = str(coin_type)
+        self.headers = json.loads(headers)
+        self.data = json.loads(data)
         self.code = int(code)
         self.msg = str(msg)
 
@@ -41,13 +40,12 @@ class getHostedAccount(unittest.TestCase):
         configHttp.set_url(self.url)
 
         # set headers
-        headers = {'appid':self.app_id,
-                   'appsecret':self.app_secret}
-        configHttp.set_headers(headers)
+        configHttp.set_headers(self.headers)
+        print(self.headers)
 
         # set data
-        data = {'coin_type':self.coin_type}
-        configHttp.set_data(data)
+        configHttp.set_data(self.data)
+        print(self.data)
 
         # test interface
         self.return_json = configHttp.requests_by_method(self.method)

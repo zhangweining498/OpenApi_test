@@ -4,3 +4,7 @@ if aa:
     print(1)
 else:
     print(3)
+
+bb = 'asdf'
+bb = bb.upper()
+print(bb)

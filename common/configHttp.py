@@ -126,7 +126,7 @@ class ConfigHttp:
             return None
 
     def requests_by_method(self,method):
-
+        method = method.upper()
         if method == 'GET':
 
             # 请求头和请求参数都存在
