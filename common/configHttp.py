@@ -158,7 +158,7 @@ class ConfigHttp:
 
             # 只有请求参数
             else:
-                response = requests.get(self.url, json=self.data)
+                response = requests.post(self.url, json=self.data)
                 return response
 
 
@@ -223,6 +223,9 @@ class ConfigHttp:
         res = requests.post(url,json=data)
         content = json.loads(res.text)
         return content
+
+
+
 
 
 

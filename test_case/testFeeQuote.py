@@ -8,7 +8,7 @@ import json
 import unittest
 from common import common,Log
 import paramunittest
-from common import configHttp
+from common import configHttp,configDing
 
 feequote_xls = common.get_xls('OpenApiCase.xlsx','feeQuote')
 localReadConfig = readConfig.ReadConfig()
@@ -18,11 +18,11 @@ info = {}
 @paramunittest.parametrized(*feequote_xls)
 class getHostedAccount(unittest.TestCase):
 
-    def setParameters(self,case_name,method,token,code,msg):
+    def setParameters(self,case_name,method,headers,code,msg):
 
         self.case_name = str(case_name)
         self.method = str(method)
-        self.token = str(token)
+        self.headers = json.loads(headers)
         self.code = str(code)
         self.msg = str(msg)
 
@@ -40,29 +40,27 @@ class getHostedAccount(unittest.TestCase):
         print(url)
 
         # set headers
-        headers = {'token':self.token}
-        self.header =headers
         configHttp.set_headers(self.headers)
-        print(headers)
+        print(self.headers)
 
         # test interface
         self.return_json = configHttp.requests_by_method(self.method)
-
+        status_code = self.return_json.status_code
         print(self.return_json.status_code)
-        self.cheackresult()
-    def cheackresult(self):
+        print(self.return_json.text)
+        self.cheackresult(url,status_code)
+    def cheackresult(self,url, status_code):
         re = []
         re.append(self.url)
         try:
             self.assertEqual(self.return_json.status_code, 200, '状态码不等于200，用例失败')
             self.info = json.loads(self.return_json.text)
-            self.assertEqual(self.info['code'], self.code)
-            self.assertIn(self.msg, self.info['msg'])
             re.append(self.info)
             self.logger.info(re)
         except Exception as Ex:
             re.append(Ex)
             self.logger.exception(re)
+            configDing.dingmsg(url, status_code, Ex)
 
 
 if __name__ == '__main__':

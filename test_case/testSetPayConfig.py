@@ -33,7 +33,10 @@ class set_pay_config(unittest.TestCase):
 
 
     def setUp(self):
-        self.dr = webdriver.Chrome('C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe')
+        # 设置无界面
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--headless')
+        self.dr = webdriver.Chrome('C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe',chrome_options= chrome_options)
 
     def testSetPayConfig(self):
 
@@ -56,7 +59,10 @@ class set_pay_config(unittest.TestCase):
         time.sleep(5)
 
         text = self.dr.find_element_by_xpath('//*[@id="root"]/div/div/div[2]/div/div[2]/button[1]/span').text
+
         self.assertIn('同意授权',text)
+
+
 
 
 

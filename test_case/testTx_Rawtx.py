@@ -1,77 +1,67 @@
 '''
-开放平台发起小额支付
+开放平台
+Merchant API 发送交易 Rawtx
 '''
 import readConfig
-import json,uuid
+import json
 import unittest
 from common import common,Log
 import paramunittest
 from common import configHttp,configDing
 
-paySmallMoney_xls = common.get_xls('OpenApiCase.xlsx','pay_small_money')
+TxRawtx_xls = common.get_xls('OpenApiCase.xlsx','tx_Rawtx')
 localReadConfig = readConfig.ReadConfig()
 configHttp = configHttp.ConfigHttp()
 info = {}
 
-@paramunittest.parametrized(*paySmallMoney_xls)
-class pay_small_money(unittest.TestCase):
+@paramunittest.parametrized(*TxRawtx_xls)
+class TXRawtx(unittest.TestCase):
 
-    def setParameters(self,case_name,method,data,merchant_order_sn,receive_address,code,msg):
+    def setParameters(self,case_name,method,headers,data,code,msg):
 
         self.case_name = str(case_name)
         self.method = str(method)
+        self.headers = json.loads(headers)
         self.data = json.loads(data)
-        self.merchant_order_sn = str(merchant_order_sn)
-        if self.merchant_order_sn == '':
-            self.merchant_order_sn = str(uuid.uuid1())
-        self.receive_address = str(receive_address)
-        self.data['merchant_order_sn'] = self.merchant_order_sn
-        self.data['receive_address'] = self.receive_address
-        self.code= int(code)
+        self.code = str(code)
         self.msg = str(msg)
+
+
 
     def setUp(self):
         self.log = Log.MyLog.get_log()
         self.logger = self.log.get_logger()
 
-    def testPaySmallMoney(self):
-        '''
-        发起小额支付
-        :return:
-        '''
-        self.url = common.get_url_from_xml('pay_small_money')
+    def testTxRawtx(self):
 
+        self.url = common.get_url_from_xml('tx_Rawtx')
         # set url
         url = configHttp.set_url(self.url)
+        print(url)
 
-        configHttp.set_data(self.data)
-        print(self.data)
-        print(type(self.data))
+        # set headers
+        headers = configHttp.set_headers(self.headers)
+        print(headers)
 
         # test interface
         self.return_json = configHttp.requests_by_method(self.method)
         status_code = self.return_json.status_code
+        print(self.return_json.status_code)
         print(self.return_json.text)
-
-        self.checkResult(url,status_code)
-
-    def checkResult(self,url,status_code):
-        '''
-        check test result
-        :return:
-        '''
+        self.cheackresult(url,status_code)
+    def cheackresult(self,url, status_code):
         re = []
         re.append(self.url)
         try:
             self.assertEqual(self.return_json.status_code, 200, '状态码不等于200，用例失败')
             self.info = json.loads(self.return_json.text)
-            self.assertEqual(self.info['code'], self.code)
             re.append(self.info)
             self.logger.info(re)
         except Exception as Ex:
             re.append(Ex)
             self.logger.exception(re)
             configDing.dingmsg(url, status_code, Ex)
+
 
 if __name__ == '__main__':
     unittest.main()

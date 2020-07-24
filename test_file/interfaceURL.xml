@@ -30,6 +30,22 @@
         <action>apply_order</action>
     </url>
 
+    <url name="create_order">
+        <one>platform</one>
+        <two>openapi</two>
+        <action>create_order</action>
+    </url>
+
+    <url name="order_sn">
+
+    </url>
+
+    <url name="search_order">
+        <one>platform</one>
+        <two>openapi</two>
+        <action>search_order</action>
+    </url>
+
     <url name="set_pay_config">
         <one>openapi</one>
         <action>set_pay_config</action>
@@ -59,6 +75,22 @@
         <three>mapi</three>
         <action>feeQuote</action>
     </url>
+
+    <url name="tx_hash">
+        <one>openapi</one>
+        <two>mapi</two>
+        <action>tx</action>
+        <hash>000000000000000000ceac4238c38cd7f7e9de06666ebd7b68345eb5f2147a2e</hash>
+    </url>
+
+    <url name="tx_Rawtx">
+        <one>openapi</one>
+        <two>mapi</two>
+        <action>tx</action>
+        <hash>000000000000000000ceac4238c38cd7f7e9de06666ebd7b68345eb5f2147a2e</hash>
+    </url>
+
+
 
     <url name="push_chain_data">
         <one>platform</one>

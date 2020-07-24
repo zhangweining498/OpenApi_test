@@ -6,7 +6,7 @@ import json
 import unittest
 from common import common,Log
 import paramunittest
-from common import configHttp
+from common import configHttp,configDing
 
 getHostedBalance_xls = common.get_xls('OpenApiCase.xlsx','get_hosted_account_balance')
 localReadConfig = readConfig.ReadConfig()
@@ -22,7 +22,7 @@ class getHostedAccount(unittest.TestCase):
         self.method = str(method)
         self.headers = json.loads(headers)
         self.data = json.loads(data)
-        self.code = str(code)
+        self.code = int(code)
         self.msg = str(msg)
 
 
@@ -35,7 +35,8 @@ class getHostedAccount(unittest.TestCase):
 
         self.url = common.get_url_from_xml('get_hosted_account_balance')
         # set url
-        configHttp.set_url(self.url)
+        url = configHttp.set_url(self.url)
+        print(url)
 
         # set headers
 
@@ -48,9 +49,10 @@ class getHostedAccount(unittest.TestCase):
         self.return_json = configHttp.requests_by_method(self.method)
 
         print(self.return_json.text)
-        self.checkResult()
+        status_code = self.return_json.status_code
+        self.checkResult(url, status_code)
 
-    def checkResult(self):
+    def checkResult(self,url, status_code):
         '''
         check test result
         :return:
@@ -63,6 +65,7 @@ class getHostedAccount(unittest.TestCase):
             self.logger.info(self.info)
         except Exception as Ex:
             self.logger.exception(Ex)
+            configDing.dingmsg(url, status_code, Ex)
 
 
 if __name__ == '__main__':

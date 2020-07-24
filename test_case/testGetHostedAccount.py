@@ -7,7 +7,7 @@ import json
 import unittest
 from common import common,Log
 import paramunittest
-from common import configHttp
+from common import configHttp,configDing
 
 
 getHostedAccount_xls = common.get_xls('OpenApiCase.xlsx','get_hosted_account')
@@ -37,7 +37,8 @@ class getHostedAccount(unittest.TestCase):
 
         self.url = common.get_url_from_xml('get_hosted_account')
         # set url
-        configHttp.set_url(self.url)
+        url = configHttp.set_url(self.url)
+        print(url)
 
         # set headers
         configHttp.set_headers(self.headers)
@@ -50,9 +51,10 @@ class getHostedAccount(unittest.TestCase):
         # test interface
         self.return_json = configHttp.requests_by_method(self.method)
         print(self.return_json.text)
+        status_code = self.return_json.status_code
 
-        self.checkResult()
-    def checkResult(self):
+        self.checkResult(url, status_code)
+    def checkResult(self,url, status_code):
         '''
         check test result
         :return:
@@ -63,12 +65,12 @@ class getHostedAccount(unittest.TestCase):
             self.assertEqual(self.return_json.status_code, 200, '状态码不等于200，用例失败')
             self.info = json.loads(self.return_json.text)
             self.assertEqual(self.info['code'], self.code)
-            self.assertIn(self.msg, self.info['msg'])
             re.append(self.info)
             self.logger.info(re)
         except Exception as Ex:
             re.append(Ex)
             self.logger.exception(re)
+            configDing.dingmsg(url, status_code, Ex)
 
 
 

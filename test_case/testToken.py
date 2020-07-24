@@ -20,8 +20,6 @@ class Token(unittest.TestCase):
 
         self.case_name = str(case_name)
         self.method = str(method)
-        # self.appid = str(appid)
-        # self.appsecret = str(appsecret)
         self.headers = json.loads(headers)
         self.code = int(code)
         self.msg = str(msg)
