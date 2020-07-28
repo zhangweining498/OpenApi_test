@@ -6,7 +6,7 @@ import json
 import unittest
 from common import common,Log
 import paramunittest
-from common import configHttp
+from common import configHttp,configDing
 
 
 get_user_info_xls = common.get_xls('OpenApiCase.xlsx','get_user_info')
@@ -39,19 +39,22 @@ class get_user_info(unittest.TestCase):
         print(self.access_token)
 
         # set url
-        configHttp.set_url(self.url)
+        url = configHttp.set_url(self.url)
+        print(url)
 
         # set data
         data = {'access_token':self.access_token}
         configHttp.set_params(data)
+        print(data)
 
         # test interface
         self.return_json = configHttp.request_get()
+        status_code = self.return_json.status_code
         print(self.return_json.text)
 
-        self.checkResult()
+        self.checkResult(url,status_code)
 
-    def checkResult(self):
+    def checkResult(self,url,status_code):
         '''
         check test result
         :return:
@@ -68,6 +71,7 @@ class get_user_info(unittest.TestCase):
         except Exception as Ex:
             re.append(Ex)
             self.logger.exception(re)
+            configDing.dingmsg(url, status_code, Ex)
 
 
 

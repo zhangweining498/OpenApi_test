@@ -6,7 +6,7 @@ import json
 import unittest
 from common import common,Log
 import paramunittest
-from common import configHttp
+from common import configHttp,configDing
 
 pushChainData_xls = common.get_xls('OpenApiCase.xlsx','push_chain_data')
 localReadConfig = readConfig.ReadConfig()
@@ -46,10 +46,12 @@ class getHostedAccount(unittest.TestCase):
 
         # test interface
         self.return_json = configHttp.requests_by_method(self.method)
+        status_code = self.return_json.status_code
 
         print(self.return_json.text)
+        self.checkResult(url,status_code)
 
-    def checkResult(self):
+    def checkResult(self,url,status_code):
         '''
         check test result
         :return:
@@ -65,6 +67,7 @@ class getHostedAccount(unittest.TestCase):
         except Exception as Ex:
             re.append(Ex)
             self.logger.exception(re)
+            configDing.dingmsg(url, status_code, Ex)
 
 if __name__ == '__main__':
     unittest.main()

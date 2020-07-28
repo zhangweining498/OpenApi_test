@@ -36,7 +36,10 @@
         <action>create_order</action>
     </url>
 
-    <url name="order_sn">
+    <url name="order">
+        <one>desktop</one>
+        <two>open</two>
+        <action>order</action>
 
     </url>
 
@@ -141,7 +144,6 @@
     </url>
 
     <url name="info">
-        <one>platform</one>
         <two>openapi</two>
         <three>svdb</three>
         <four>BSV</four>

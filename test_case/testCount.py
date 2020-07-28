@@ -66,7 +66,7 @@ class count(unittest.TestCase):
         except Exception as Ex:
             re.append(Ex)
             self.logger.exception(re)
-            # configDing.dingmsg(url, status_code, Ex)
+            configDing.dingmsg(url, status_code, Ex)
 
 if __name__ == '__main__':
     unittest.main()

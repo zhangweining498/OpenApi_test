@@ -5,7 +5,7 @@ import json,time
 import unittest
 from common import common,Log
 import paramunittest
-from common import configHttp
+from common import configHttp,configUI
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -30,11 +30,11 @@ class get_code(unittest.TestCase):
 
 
     def setUp(self):
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument('--headless')
-        self.dr = webdriver.Chrome('C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe',\
-                                   chrome_options=chrome_options)
-
+        # chrome_options = webdriver.ChromeOptions()
+        # chrome_options.add_argument('--headless')
+        # self.dr = webdriver.Chrome('C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe',\
+        #                            chrome_options=chrome_options)
+        self.dr = configUI.get_driver()
         self.log = Log.MyLog.get_log()
         self.logger = self.log.get_logger()
 
@@ -48,7 +48,7 @@ class get_code(unittest.TestCase):
 
         #显式等待账户输入框出现
         locate = (By.XPATH, '//*[@id="username"]')
-        WebDriverWait(self.dr, 20).until(EC.presence_of_element_located(locate))
+        WebDriverWait(self.dr, 10).until(EC.presence_of_element_located(locate))
 
         # 输入账号
         self.dr.find_element_by_xpath('//*[@id="username"]').send_keys('13882618810@163.com')

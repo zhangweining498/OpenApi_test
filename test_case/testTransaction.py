@@ -32,8 +32,9 @@ class transaction(unittest.TestCase):
 
     def testMerkle(self):
         # set url
-        self.url = common.get_url_from_xml('merkle')
+        self.url = common.get_url_from_xml('transaction')
         url = configHttp.set_url(self.url)
+        print(url)
 
         # set headers
         configHttp.set_headers(self.headers)

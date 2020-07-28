@@ -6,7 +6,7 @@ import json
 import unittest
 from common import common,Log
 import paramunittest
-from common import configHttp
+from common import configHttp,configDing
 
 access_token_xls = common.get_xls('OpenApiCase.xlsx','access_token')
 localReadConfig = readConfig.ReadConfig()
@@ -40,7 +40,8 @@ class access_token(unittest.TestCase):
         self.url = common.get_url_from_xml('access_token')
 
         # set url
-        configHttp.set_url(self.url)
+        url = configHttp.set_url(self.url)
+        print(url)
 
 
         # set data
@@ -48,12 +49,14 @@ class access_token(unittest.TestCase):
                 'secret':self.secret,
                 'code':code}
         configHttp.set_data(data)
+        print(data)
 
         # test interface
         self.return_json = configHttp.requests_by_method(self.method)
-        self.checkResult()
+        status_code = self.return_json.status_code
+        self.checkResult(url,status_code)
 
-    def checkResult(self):
+    def checkResult(self,url,status_code):
         '''
                 check test result
                 :return:
@@ -72,6 +75,7 @@ class access_token(unittest.TestCase):
         except Exception as Ex:
             re.append(Ex)
             self.logger.exception(re)
+            configDing.dingmsg(url, status_code, Ex)
 
 
 

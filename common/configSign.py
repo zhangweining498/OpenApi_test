@@ -25,10 +25,6 @@ def getSignature(orderData,appsecret):
     HMAC = hmac.new(secret.encode('utf-8'),data.encode('utf-8'),digestmod="sha256").hexdigest()
     return HMAC
 
-
-# aa = getSignature(order_data,appsecret)
-# print(aa)
-
 def get_order_sign(url):
     appsecret = "e9943b6b167554fe555e39c1428c1d86"
     order_data = {"nonce_str": "1595558549178",

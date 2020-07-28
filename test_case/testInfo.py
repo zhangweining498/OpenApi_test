@@ -35,6 +35,7 @@ class info(unittest.TestCase):
         # set url
         self.url = common.get_url_from_xml('info')
         url = configHttp.set_url(self.url)
+        print(url)
 
         # set headers
         configHttp.set_headers(self.headers)

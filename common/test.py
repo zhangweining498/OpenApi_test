@@ -1,10 +1,18 @@
 
-aa = {'token': 'd933134cd7a03a80e50e38105307657fb45c8f419c93a42bb5d8c99a94dc6206'}
-if aa:
-    print(1)
-else:
-    print(3)
+from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.chrome.options import Options
+import time
 
-bb = 'asdf'
-bb = bb.upper()
-print(bb)
+chrome_options = Options()
+chrome_options.add_argument('--headless')
+
+driver = webdriver.Remote(
+    command_executor='http://192.168.1.13:4444/wd/hub',
+    desired_capabilities=DesiredCapabilities.CHROME)
+
+driver.get('https://www.baidu.com/')
+time.sleep(3)
+print(driver.title)
+
+driver.close()

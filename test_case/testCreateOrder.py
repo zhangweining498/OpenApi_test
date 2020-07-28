@@ -23,7 +23,7 @@ class TXRawtx(unittest.TestCase):
         self.method = str(method)
         self.data = json.loads(data)
         self.appsecret = str(appsecret)
-        self.code = str(code)
+        self.code = int(code)
         self.msg = str(msg)
 
 

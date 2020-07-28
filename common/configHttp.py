@@ -1,5 +1,6 @@
 import readConfig
 from common.Log import MyLog as MyLog
+from common import configUI
 from common.common import get_headers
 # from common import common
 import requests,json,time
@@ -29,6 +30,7 @@ class ConfigHttp:
         self.url = None
         self.files = {}
         self.state = 0
+
 
     def set_headers(self, headers):
         '''
@@ -175,11 +177,12 @@ class ConfigHttp:
         new_url = self.url = scheme + '://' + host + url
 
         # 设置无界面
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument('--headless')
-
-        dr = webdriver.Chrome('C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe',\
-                              chrome_options=chrome_options)
+        # chrome_options = webdriver.ChromeOptions()
+        # chrome_options.add_argument('--headless')
+        #
+        # dr = webdriver.Chrome('C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe',\
+        #                       chrome_options=chrome_options)
+        dr = configUI.get_driver()
         dr.get(new_url + '?app_id=0d158bc3605fffe30f7046f0c9c7e4bf\
                                &redirect_uri=https://www.ddpurse.com/platform/testapp/hello')
         locate = (By.XPATH, '//*[@id="username"]')
@@ -223,6 +226,7 @@ class ConfigHttp:
         res = requests.post(url,json=data)
         content = json.loads(res.text)
         return content
+
 
 
 
