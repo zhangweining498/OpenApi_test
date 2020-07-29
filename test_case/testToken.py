@@ -38,6 +38,7 @@ class Token(unittest.TestCase):
 
         # set headers
         configHttp.set_headers(self.headers)
+        print(self.headers)
 
         # test interface
         self.return_json = configHttp.requests_by_method(self.method)
@@ -63,7 +64,7 @@ class Token(unittest.TestCase):
         except Exception as Ex:
             re.append(Ex)
             self.logger.exception(re)
-            configDing.dingmsg(url,status_code,Ex)
+            # configDing.dingmsg(url,status_code,Ex)
 
 
 

@@ -38,6 +38,7 @@ class count(unittest.TestCase):
         print(url)
 
         # set headers
+        self.header['token'] = configHttp.get_openapi_token()
         configHttp.set_headers(self.header)
         print(self.header)
 

@@ -76,7 +76,8 @@ class get_code(unittest.TestCase):
 
         try:
             self.assertIsNotNone(code)
-            self.logger.info(self.info)
+            code = 'code:' + code
+            self.logger.info(code)
         except Exception as Ex:
             self.logger.exception(Ex)
 

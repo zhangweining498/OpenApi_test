@@ -61,71 +61,71 @@ class ConfigHttp:
         """
         self.data = data
 
-    def set_params(self,params):
-        '''
-        set params
-        :param params:
-        :return:
-        '''
-        self.params = params
-
-    def request_get(self):
-        '''
-        defind get method
-        :return:
-        '''
-
-        try:
-            response = requests.get(self.url, headers=self.headers, params=self.params)
-            return response
-        except Exception as Ex:
-            self.logger.exception(Ex)
-
-
-    def request_get_no_params(self):
-        try:
-            response = requests.get(self.url, headers=self.headers)
-            return response
-        except Exception as ex:
-            self.logger.exception(ex)
-            return None
-
-    def request_json_post(self):
-        '''
-        defind post method,make json
-        :return:
-        '''
-        try:
-            response = requests.post(self.url, headers = self.headers, json = self.data)
-            return response
-        except Exception as ex:
-            self.logger.exception(ex)
-            return None
-
-
-    def request_post_no_data(self):
-        '''
-        defind post method,make json
-        :return:
-        '''
-        try:
-            response = requests.post(self.url, headers = self.headers)
-            return response
-        except Exception as ex:
-            self.logger.exception(ex)
-            return None
-
-    def request_post_not_headers(self):
-        '''
-        defind post method,make json
-        :return:
-        '''
-        try:
-            response = requests.post(self.url, json = self.data)
-            return response
-        except Exception as ex:
-            self.logger.error(ex)
-            return None
+    # def set_params(self,params):
+    #     '''
+    #     set params
+    #     :param params:
+    #     :return:
+    #     '''
+    #     self.params = params
+    #
+    # def request_get(self):
+    #     '''
+    #     defind get method
+    #     :return:
+    #     '''
+    #
+    #     try:
+    #         response = requests.get(self.url, headers=self.headers, params=self.params)
+    #         return response
+    #     except Exception as Ex:
+    #         self.logger.exception(Ex)
+    #
+    #
+    # def request_get_no_params(self):
+    #     try:
+    #         response = requests.get(self.url, headers=self.headers)
+    #         return response
+    #     except Exception as ex:
+    #         self.logger.exception(ex)
+    #         return None
+    #
+    # def request_json_post(self):
+    #     '''
+    #     defind post method,make json
+    #     :return:
+    #     '''
+    #     try:
+    #         response = requests.post(self.url, headers = self.headers, json = self.data)
+    #         return response
+    #     except Exception as ex:
+    #         self.logger.exception(ex)
+    #         return None
+    #
+    #
+    # def request_post_no_data(self):
+    #     '''
+    #     defind post method,make json
+    #     :return:
+    #     '''
+    #     try:
+    #         response = requests.post(self.url, headers = self.headers)
+    #         return response
+    #     except Exception as ex:
+    #         self.logger.exception(ex)
+    #         return None
+    #
+    # def request_post_not_headers(self):
+    #     '''
+    #     defind post method,make json
+    #     :return:
+    #     '''
+    #     try:
+    #         response = requests.post(self.url, json = self.data)
+    #         return response
+    #     except Exception as ex:
+    #         self.logger.error(ex)
+    #         return None
 
     def requests_by_method(self,method):
         method = method.upper()
@@ -226,6 +226,15 @@ class ConfigHttp:
         res = requests.post(url,json=data)
         content = json.loads(res.text)
         return content
+
+
+    def get_openapi_token(self):
+        headers = {'appid': '0d158bc3605fffe30f7046f0c9c7e4bf', 'appsecret': 'e9943b6b167554fe555e39c1428c1d86'}
+        url = 'https://www.ddpurse.com/platform/openapi/svdb/token'
+        res = requests.get(url,headers= headers)
+        token = json.loads(res.text)['data']
+        return token
+
 
 
 
