@@ -32,9 +32,11 @@ class inventory(unittest.TestCase):
         self.logger = self.log.get_logger()
 
     def testInventory(self):
+        print(self.method)
         # set url
         self.url = common.get_url_from_xml('inventory')
         url = configHttp.set_url(self.url)
+        print(url)
 
         # set headers
         configHttp.set_headers(self.headers)

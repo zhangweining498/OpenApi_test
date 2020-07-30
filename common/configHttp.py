@@ -37,9 +37,6 @@ class ConfigHttp:
         set headers
         :return:
         '''
-
-        # self.headers = get_headers()
-        # print(self.headers)
         self.headers = headers
 
 
@@ -60,72 +57,6 @@ class ConfigHttp:
         :return:
         """
         self.data = data
-
-    # def set_params(self,params):
-    #     '''
-    #     set params
-    #     :param params:
-    #     :return:
-    #     '''
-    #     self.params = params
-    #
-    # def request_get(self):
-    #     '''
-    #     defind get method
-    #     :return:
-    #     '''
-    #
-    #     try:
-    #         response = requests.get(self.url, headers=self.headers, params=self.params)
-    #         return response
-    #     except Exception as Ex:
-    #         self.logger.exception(Ex)
-    #
-    #
-    # def request_get_no_params(self):
-    #     try:
-    #         response = requests.get(self.url, headers=self.headers)
-    #         return response
-    #     except Exception as ex:
-    #         self.logger.exception(ex)
-    #         return None
-    #
-    # def request_json_post(self):
-    #     '''
-    #     defind post method,make json
-    #     :return:
-    #     '''
-    #     try:
-    #         response = requests.post(self.url, headers = self.headers, json = self.data)
-    #         return response
-    #     except Exception as ex:
-    #         self.logger.exception(ex)
-    #         return None
-    #
-    #
-    # def request_post_no_data(self):
-    #     '''
-    #     defind post method,make json
-    #     :return:
-    #     '''
-    #     try:
-    #         response = requests.post(self.url, headers = self.headers)
-    #         return response
-    #     except Exception as ex:
-    #         self.logger.exception(ex)
-    #         return None
-    #
-    # def request_post_not_headers(self):
-    #     '''
-    #     defind post method,make json
-    #     :return:
-    #     '''
-    #     try:
-    #         response = requests.post(self.url, json = self.data)
-    #         return response
-    #     except Exception as ex:
-    #         self.logger.error(ex)
-    #         return None
 
     def requests_by_method(self,method):
         method = method.upper()

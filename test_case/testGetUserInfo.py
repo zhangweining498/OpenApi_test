@@ -44,11 +44,11 @@ class get_user_info(unittest.TestCase):
 
         # set data
         data = {'access_token':self.access_token}
-        configHttp.set_params(data)
+        configHttp.set_data(data)
         print(data)
 
         # test interface
-        self.return_json = configHttp.request_get()
+        self.return_json = configHttp.requests_by_method(self.method)
         status_code = self.return_json.status_code
         print(self.return_json.text)
 

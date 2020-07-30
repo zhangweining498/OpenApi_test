@@ -66,10 +66,12 @@ class Order(unittest.TestCase):
 
         # 点击同意支付
         self.dr.find_element_by_xpath('//*[@id="root"]/div/div/div[2]/div/div[2]/button[1]').click()
+        time.sleep(2)
 
-        locate = (By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div[1]/div/div[1]')
-        WebDriverWait(self.dr, 10).until(EC.presence_of_element_located(locate))
+        # locate = (By.XPATH, '//*[@id="root"]/div/div/div[2]/div/div[1]/div/div[1]')
+        # WebDriverWait(self.dr, 10).until(EC.presence_of_element_located(locate))
         text = self.dr.find_element_by_xpath('//*[@id="root"]/div/div/div[2]/div/div[1]/div/div[1]').text
+        time.sleep(2)
         print(text)
 
         self.cheackresult(text)
