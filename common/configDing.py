@@ -4,7 +4,7 @@ import time
 
 def dingmsg(url,code,info):
     import time
-    webhook = 'https://oapi.dingtalk.com/robot/send?access_token=1069b1c9bb790fb8f46154904eac9cf53152e4216b5175b654dbb9ec81244d3e'
+    webhook = 'https://oapi.dingtalk.com/robot/send?access_token=36ecbdcb4c3c54b51b4fc611770591bfcd014863a695cbb1557d9d0705b011e1'
     header = {"Content-Type": "application/json",
                 "Charset": "UTF-8"}
     time = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
