@@ -16,13 +16,13 @@ info = {}
 @paramunittest.parametrized(*access_token_xls)
 class access_token(unittest.TestCase):
 
-    def setParameters(self,case_name,method,app_id,secret,code,code_res,msg):
+    def setParameters(self,case_name,method,app_id,secret,code01,code,msg):
         self.case_name = str(case_name)
         self.method = str(method)
         self.app_id = str(app_id)
         self.secret = str(secret)
-        self.code = str(code)
-        self.code_res = int(code_res)
+        self.code01 = str(code01)
+        self.code = int(code)
         self.msg = str(msg)
 
     def setUp(self):
@@ -52,30 +52,37 @@ class access_token(unittest.TestCase):
         print(data)
 
         # test interface
-        self.return_json = configHttp.requests_by_method(self.method)
-        status_code = self.return_json.status_code
-        self.checkResult(url,status_code)
-
-    def checkResult(self,url,status_code):
-        '''
-                check test result
-                :return:
-                '''
-        re = []
-        re.append(self.url)
         try:
-            self.assertEqual(self.return_json.status_code, 200, '状态码不等于200，用例失败')
-            self.info = json.loads(self.return_json.text)
-            self.assertEqual(self.info['code'], self.code_res)
-            self.assertIsNotNone(self.info['data']['access_token'])
-            self.assertIsNotNone(self.info['data']['refresh_token'])
-            self.assertIn(self.msg, self.info['msg'])
-            re.append(self.info)
-            self.logger.info(re)
+            self.return_json = configHttp.requests_by_method(self.method)
         except Exception as Ex:
-            re.append(Ex)
-            self.logger.exception(re)
-            configDing.dingmsg(url, status_code, Ex)
+            self.logger.exception(Ex)
+            return
+
+        common.checkResult(url,self.return_json,self.code)
+    #     self.return_json = configHttp.requests_by_method(self.method)
+    #     status_code = self.return_json.status_code
+    #     self.checkResult(url,status_code)
+    #
+    # def checkResult(self,url,status_code):
+    #     '''
+    #             check test result
+    #             :return:
+    #             '''
+    #     re = []
+    #     re.append(self.url)
+    #     try:
+    #         self.assertEqual(self.return_json.status_code, 200, '状态码不等于200，用例失败')
+    #         self.info = json.loads(self.return_json.text)
+    #         self.assertEqual(self.info['code'], self.code_res)
+    #         self.assertIsNotNone(self.info['data']['access_token'])
+    #         self.assertIsNotNone(self.info['data']['refresh_token'])
+    #         self.assertIn(self.msg, self.info['msg'])
+    #         re.append(self.info)
+    #         self.logger.info(re)
+    #     except Exception as Ex:
+    #         re.append(Ex)
+    #         self.logger.exception(re)
+    #         configDing.dingmsg(url, status_code, Ex)
 
 
 

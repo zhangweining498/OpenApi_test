@@ -2,14 +2,16 @@ import requests,json
 import readConfig
 from xlrd import open_workbook
 from xlutils.copy import copy
-import os
+import os,requests
 import xml.etree.ElementTree as ET
 import unittest
-
+# from common import Log,configDing
 localReadConfig = readConfig.ReadConfig()
 
 proDir = readConfig.proDir
 session = requests.session()
+
+
 
 def get_headers():
     url = 'https://www.ddpurse.com/openapi/v1/signin'
@@ -86,17 +88,44 @@ def get_url_from_xml(name):
     # print(url)
     return url
 
+# ****************************** check Result********************************
+from common import Log,configDing
+
+log = Log.MyLog.get_log()
+logger = log.get_logger()
+
+
+def checkResult(url,return_json,code):
+    re = []
+    re.append(url)
+    status_code = return_json.status_code
+    info = json.loads(return_json.text)
+
+    try:
+        if status_code == 200:
+            re.append(info)
+            if info['code'] == code:
+                re.append(info)
+                logger.info(re)
+
+            else:
+                logger.error(re)
+                configDing.dingmsg(url,return_json,code)
+
+        else:
+            pass
+    except Exception as Ex:
+        re.append(Ex)
+        logger.exception(re)
 
 
 
 
 
 if __name__ == '__main__':
-    pass
-
-    # print(get_url_from_xml('get_code'))
-    #
-    # bb = get_headers()
-    # print(bb)
+    url = 'https://www.ddpurse.com/platform/openapi/svdb/token'
+    headers = {'appid': '0d158bc3605fffe30f7046f0c9c7e4bf', 'appsecret': 'e9943b6b167554fe555e39c1428c1d86'}
+    return_json = requests.get(url,headers = headers)
+    checkResult(url,return_json,'-132561')
 
 

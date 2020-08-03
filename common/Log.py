@@ -26,7 +26,7 @@ class Log:
         handler = logging.FileHandler(os.path.join(logPath, 'output.log'))
 
         # 定义handler的输出格式
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(filename)s - %(levelname)s - %(message)s')
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         handler.setFormatter(formatter)
 
         # 将logger添加到handler里面

@@ -46,26 +46,33 @@ class getHostedAccount(unittest.TestCase):
         configHttp.set_data(self.data)
 
         # test interface
-        self.return_json = configHttp.requests_by_method(self.method)
-
-        print(self.return_json.text)
-        status_code = self.return_json.status_code
-        self.checkResult(url, status_code)
-
-    def checkResult(self,url, status_code):
-        '''
-        check test result
-        :return:
-        '''
         try:
-            self.assertEqual(self.return_json.status_code, 200, '状态码不等于200，用例失败')
-            self.info = json.loads(self.return_json.text)
-            self.assertEqual(self.info['code'], self.code)
-            self.assertIn(self.msg, self.info['msg'])
-            self.logger.info(self.info)
+            self.return_json = configHttp.requests_by_method(self.method)
         except Exception as Ex:
             self.logger.exception(Ex)
-            configDing.dingmsg(url, status_code, Ex)
+            return
+
+        common.checkResult(url,self.return_json,self.code)
+    #     self.return_json = configHttp.requests_by_method(self.method)
+    #
+    #     print(self.return_json.text)
+    #     status_code = self.return_json.status_code
+    #     self.checkResult(url, status_code)
+    #
+    # def checkResult(self,url, status_code):
+    #     '''
+    #     check test result
+    #     :return:
+    #     '''
+    #     try:
+    #         self.assertEqual(self.return_json.status_code, 200, '状态码不等于200，用例失败')
+    #         self.info = json.loads(self.return_json.text)
+    #         self.assertEqual(self.info['code'], self.code)
+    #         self.assertIn(self.msg, self.info['msg'])
+    #         self.logger.info(self.info)
+    #     except Exception as Ex:
+    #         self.logger.exception(Ex)
+    #         configDing.dingmsg(url, status_code, Ex)
 
 
 if __name__ == '__main__':
