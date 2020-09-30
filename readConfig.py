@@ -1,7 +1,8 @@
+#!/usr/bin/python
+# coding=utf-8
+
 import os
 import configparser
-import codecs
-
 
 # 获取当前路径
 proDir = os.path.split(os.path.realpath(__file__))[0]
@@ -11,7 +12,6 @@ configPath = os.path.join(proDir,'config.ini')
 
 class ReadConfig:
     def __init__(self):
-
         self.cf = configparser.ConfigParser()
         self.cf.read(configPath)
 
@@ -27,8 +27,8 @@ class ReadConfig:
         value = self.cf.get("HEADERS", name)
         return value
 
-    def get_user(self,name):
-        value = self.cf.get('USER',name)
+    def get_user(self, name):
+        value = self.cf.get('USER', name)
         return value
 
     def set_headers(self, name, value):
@@ -53,10 +53,7 @@ class ReadConfig:
 
 
 
-# if __name__ == '__main__':
-    # r = ReadConfig()
-    # a = r.get_headers('device-id')
-    # print(a)
+
 
 
 
